@@ -34,6 +34,7 @@ devtoolsmenu (){
 	echo "Choose option for dev-tools: "
 	echo "1) Install org.gnome.Builder"
 	echo "2) Install git make gcc g++... "
+    echo "3) Install Linux Mint devtools... "
 	read CHOOSE
 	case $CHOOSE in
 	  1)
@@ -42,6 +43,10 @@ devtoolsmenu (){
 
 	  2)
 	    sudo apt install git make gcc g++ meson
+	    ;;
+
+      3)
+	    sudo apt install mint-dev-tools --install-recommends
 	    ;;
 
 	  *)
