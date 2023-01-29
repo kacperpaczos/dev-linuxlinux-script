@@ -1,1 +1,1 @@
-# dev-linuxlinux-script
+# dev-linuxmint-script
