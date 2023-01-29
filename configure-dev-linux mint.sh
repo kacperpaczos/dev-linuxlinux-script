@@ -115,6 +115,66 @@ xappmenu(){
 	esac
 
 }
+mintupdatemenu(){
+    clear
+	echo "Choose option for mintupdate: "
+	echo "1) clone: "
+    echo "2) syncfork (you need 1 first! ): "
+    echo "3) build "
+    echo "4) install "
+    echo "5) clear ALL "
+
+    cd ..
+
+	read CHOOSE
+	case $CHOOSE in
+	  1)
+        
+        cd mintupdate-dev
+        git clone https://github.com/kacperpaczos/mintupdate.git
+        sudo chmod 777 -R ./mintupdate
+        cd mintupdate
+        read -p "...ENDED! CLICK TO GO NEXT!"
+	    xappmenu
+	    ;;
+      2)
+        cd mintupdate
+        git fetch upstream
+        git checkout master
+        git merge upstream/master
+        read -p "...ENDED! CLICK TO GO NEXT!"
+	    xappmenu
+	    ;;
+      3)
+        sudo apt install libxml2-dev cmake meson libglib2.0-dev libgtk-3-dev libgtksourceview-4-dev libpeas-dev libgnomekbd-dev valac python-gi-dev gir1.2-dbusmenu-gtk3-0.4 libxkbfile-dev
+        cd mintupdate
+        meson --prefix=/usr build
+        read -p "...ENDED! CLICK TO GO NEXT!"
+        ninja -v -C build
+        read -p "...ENDED! CLICK TO GO NEXT!"
+        
+	    xappmenu
+	    ;;
+      4)
+        cd mintupdate
+        sudo ninja install -v -C build
+        read -p "...ENDED! CLICK TO GO NEXT!"
+	    xappmenu
+	    ;;
+    
+      5)
+        
+        cd ..
+        sudo rm -R ./mintupdate-dev
+        read -p "...ENDED! CLICK TO GO NEXT!"
+	    mintprojectssmenu
+	    ;;
+	  *)
+	    mintprojectssmenu
+	    ;;
+	esac
+
+}
 xedmenu(){
     clear
 	echo "Choose option for xed: "
@@ -177,8 +237,9 @@ mintprojectssmenu(){
     clear
     
 	echo "Choose option: "
-    echo "1) xapp: "
+    echo "1) xapp (probably you need this): "
 	echo "2) xed: "
+    echo "3) mintupdate"
 	read CHOOSE
 	case $CHOOSE in
 	  1)
@@ -196,6 +257,12 @@ mintprojectssmenu(){
 	    xedmenu
 	    ;;
 
+      3)mkdir mintupdate-dev
+        sudo chmod 777 -R ./mintupdate-dev
+        cd mintupdate-dev
+
+        mintupdatemenu
+        ;;
 
 	  *)
 	    mainmenu
@@ -208,6 +275,7 @@ mainmenu (){
 	echo "1) Install lib*dev: "
 	echo "2) Install dev-tools: "
 	echo "3) Git, build, install... "
+    echo "4) Enable daily builds... "
 	read CHOOSE
 	case $CHOOSE in
 	  1)
@@ -224,6 +292,15 @@ mainmenu (){
 	    mintprojectssmenu
         mainmenu
 	    ;;
+
+      4)
+	    sudo add-apt-repository ppa:linuxmint-daily-build-team/daily-builds
+        sudo apt-get update
+        sudo apt-get upgrade
+        read -p "...ENDED! CLICK TO GO NEXT!"
+        mainmenu
+	    ;;
+
 
 	  *)
 	    exit
