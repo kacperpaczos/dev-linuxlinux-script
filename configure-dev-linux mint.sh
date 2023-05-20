@@ -9,8 +9,8 @@ devupdatemenu(){
     clear
     cd $BASEDIR
 	echo "Choose option for dev-update: "
-	echo "1) Update apt packages"
-	echo "2) Update flatpak packages"
+	echo "1) Update flatpak packages"
+	echo "2) Update apt packages"
     echo "3) Both... "
     echo "*) Any key to exit... "
 
