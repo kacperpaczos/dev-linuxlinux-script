@@ -92,12 +92,14 @@ devlibmenu (){
 	esac
 }
 devtoolsmenu (){
+
     clear
     cd $BASEDIR
 	echo "Choose option for dev-tools: "
 	echo "1) Install org.gnome.Builder"
 	echo "2) Install git make gcc g++... "
     echo "3) Install Linux Mint devtools... "
+    echo "4) Install org.gnome.design.IconLibrary"
     echo "*) Any key to exit... "
 
 	read CHOOSE
@@ -112,6 +114,10 @@ devtoolsmenu (){
 
       3)
 	    sudo apt install mint-dev-tools --install-recommends
+	    ;;
+
+      4)
+	    sudo flatpak install org.gnome.design.IconLibrary
 	    ;;
 
 	  *)
