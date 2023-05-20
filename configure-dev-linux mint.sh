@@ -12,6 +12,8 @@ devupdatemenu(){
 	echo "1) Update apt packages"
 	echo "2) Update flatpak packages"
     echo "3) Both... "
+    echo "*) Any key to exit... "
+
 	read CHOOSE
 	case $CHOOSE in
 	  1)
@@ -71,6 +73,8 @@ devlibmenu (){
 	echo "1) Install lib*dev: "
 	echo "2) Install dev-tools: "
 	echo "3) Install dev-tools: "
+    echo "*) Any key to exit... "
+
 	read CHOOSE
 	case $CHOOSE in
 	  1)
@@ -94,6 +98,8 @@ devtoolsmenu (){
 	echo "1) Install org.gnome.Builder"
 	echo "2) Install git make gcc g++... "
     echo "3) Install Linux Mint devtools... "
+    echo "*) Any key to exit... "
+
 	read CHOOSE
 	case $CHOOSE in
 	  1)
@@ -122,6 +128,7 @@ xappmenu(){
     echo "3) build "
     echo "4) install "
     echo "5) clear ALL "
+    echo "*) Any key to exit... "
 
     cd ..
 
@@ -182,6 +189,7 @@ mintupdatemenu(){
     echo "3) build "
     echo "4) install "
     echo "5) clear ALL "
+    echo "*) Any key to exit... "
 
     cd ..
 
@@ -242,6 +250,7 @@ xedmenu(){
     echo "3) build "
     echo "4) install "
     echo "5) clear ALL "
+    echo "*) Any key to exit... "
 
     cd ..
 
@@ -299,6 +308,7 @@ mintprojectssmenu(){
     echo "1) xapp (probably you need this): "
 	echo "2) xed: "
     echo "3) mintupdate"
+    echo "*) Any key to exit... "
 	read CHOOSE
 	case $CHOOSE in
 	  1)
@@ -336,6 +346,7 @@ mainmenu (){
 	echo "2) Install dev-tools: "
 	echo "3) Git, build, install... "
     echo "4) Enable daily builds... "
+    echo "*) Any key to exit... "
     
 	read CHOOSE
 	case $CHOOSE in
