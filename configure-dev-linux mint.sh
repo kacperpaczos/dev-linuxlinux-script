@@ -5,6 +5,39 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 BASEDIR=$(pwd)
+devupdatemenu(){
+    clear
+    cd $BASEDIR
+	echo "Choose option for dev-update: "
+	echo "1) Update apt packages"
+	echo "2) Update flatpak packages"
+    echo "3) Both... "
+	read CHOOSE
+	case $CHOOSE in
+	  1)
+	    sudo flatpak update
+        read -p "...ENDED! CLICK TO GO NEXT!"
+	    devupdatemenu
+	    ;;
+
+	  2)
+	    sudo apt update && sudo apt upgrade
+        read -p "...ENDED! CLICK TO GO NEXT!"
+	    devupdatemenu
+	    ;;
+
+      3)
+	    sudo flatpak update
+        sudo apt update && sudo apt upgrade
+        read -p "...ENDED! CLICK TO GO NEXT!"
+	    devupdatemenu
+	    ;;
+
+	  *)
+	    mainmenu
+	    ;;
+	esac
+}
 devlibmenu (){
     clear
     cd $BASEDIR
@@ -272,12 +305,18 @@ mintprojectssmenu(){
 mainmenu (){
     clear
 	echo "Choose option: "
+    echo "0) Update the system... "
 	echo "1) Install lib*dev: "
 	echo "2) Install dev-tools: "
 	echo "3) Git, build, install... "
     echo "4) Enable daily builds... "
+    
 	read CHOOSE
 	case $CHOOSE in
+      0)
+	    devlibmenu
+        mainmenu
+	    ;;
 	  1)
 	    devlibmenu
         mainmenu
