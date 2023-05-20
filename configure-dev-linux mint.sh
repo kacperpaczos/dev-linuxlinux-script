@@ -16,45 +16,45 @@ devupdatemenu(){
 	case $CHOOSE in
 	  1)
 	    sudo flatpak update
-        read -p "...ENDED! CLICK TO GO NEXT!"
+        read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
         read -p "Remove unused packages [of flatpak]? (y/n): " response
 
         if [ "$response" == "y" ]; then
             sudo flatpak uninstall --unused
-            read -p "...ENDED! CLICK TO GO NEXT!"
+            read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
         fi
 	    devupdatemenu
 	    ;;
 
 	  2)
 	    sudo apt update && sudo apt upgrade
-        read -p "...ENDED! CLICK TO GO NEXT!"
+        read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
         read -p "Remove unused packages [of apt]? (y/n): " response
 
         if [ "$response" == "y" ]; then
             sudo apt autoremove
-            read -p "...ENDED! CLICK TO GO NEXT!"
+            read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
         fi
 	    devupdatemenu
 	    ;;
 
       3)
 	    sudo flatpak update
-        read -p "...ENDED! CLICK TO GO NEXT!"
+        read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
         read -p "Remove unused packages [of flatpak]? (y/n): " response
 
         if [ "$response" == "y" ]; then
             sudo flatpak uninstall --unused
-            read -p "...ENDED! CLICK TO GO NEXT!"
+            read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
         fi
 
         sudo apt update && sudo apt upgrade
-        read -p "...ENDED! CLICK TO GO NEXT!"
+        read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
         read -p "Remove unused packages [of apt]? (y/n): " response
 
         if [ "$response" == "y" ]; then
             sudo apt autoremove
-            read -p "...ENDED! CLICK TO GO NEXT!"
+            read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
         fi
         devupdatemenu
 	    ;;
@@ -133,7 +133,7 @@ xappmenu(){
         git clone https://github.com/kacperpaczos/xapp.git
         sudo chmod 777 -R ./xapp
         cd xapp
-        read -p "...ENDED! CLICK TO GO NEXT!"
+        read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
 	    xappmenu
 	    ;;
       2)
@@ -141,23 +141,23 @@ xappmenu(){
         git fetch upstream
         git checkout master
         git merge upstream/master
-        read -p "...ENDED! CLICK TO GO NEXT!"
+        read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
 	    xappmenu
 	    ;;
       3)
         sudo apt install libxml2-dev cmake meson libglib2.0-dev libgtk-3-dev libgtksourceview-4-dev libpeas-dev libgnomekbd-dev valac python-gi-dev gir1.2-dbusmenu-gtk3-0.4 libxkbfile-dev
         cd xapp
         meson --prefix=/usr build
-        read -p "...ENDED! CLICK TO GO NEXT!"
+        read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
         ninja -v -C build
-        read -p "...ENDED! CLICK TO GO NEXT!"
+        read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
         
 	    xappmenu
 	    ;;
       4)
         cd xapp
         sudo ninja install -v -C build
-        read -p "...ENDED! CLICK TO GO NEXT!"
+        read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
 	    xappmenu
 	    ;;
     
@@ -165,7 +165,7 @@ xappmenu(){
         
         cd ..
         sudo rm -R ./xapp-dev
-        read -p "...ENDED! CLICK TO GO NEXT!"
+        read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
 	    mintprojectssmenu
 	    ;;
 	  *)
@@ -193,7 +193,7 @@ mintupdatemenu(){
         git clone https://github.com/kacperpaczos/mintupdate.git
         sudo chmod 777 -R ./mintupdate
         cd mintupdate
-        read -p "...ENDED! CLICK TO GO NEXT!"
+        read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
 	    xappmenu
 	    ;;
       2)
@@ -201,23 +201,23 @@ mintupdatemenu(){
         git fetch upstream
         git checkout master
         git merge upstream/master
-        read -p "...ENDED! CLICK TO GO NEXT!"
+        read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
 	    xappmenu
 	    ;;
       3)
         sudo apt install libxml2-dev cmake meson libglib2.0-dev libgtk-3-dev libgtksourceview-4-dev libpeas-dev libgnomekbd-dev valac python-gi-dev gir1.2-dbusmenu-gtk3-0.4 libxkbfile-dev
         cd mintupdate
         meson --prefix=/usr build
-        read -p "...ENDED! CLICK TO GO NEXT!"
+        read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
         ninja -v -C build
-        read -p "...ENDED! CLICK TO GO NEXT!"
+        read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
         
 	    xappmenu
 	    ;;
       4)
         cd mintupdate
         sudo ninja install -v -C build
-        read -p "...ENDED! CLICK TO GO NEXT!"
+        read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
 	    xappmenu
 	    ;;
     
@@ -225,7 +225,7 @@ mintupdatemenu(){
         
         cd ..
         sudo rm -R ./mintupdate-dev
-        read -p "...ENDED! CLICK TO GO NEXT!"
+        read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
 	    mintprojectssmenu
 	    ;;
 	  *)
@@ -253,7 +253,7 @@ xedmenu(){
         git clone https://github.com/kacperpaczos/xed.git
         sudo chmod 777 -R ./xed
         cd xed
-        read -p "...ENDED! CLICK TO GO NEXT!"
+        read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
 	    xedmenu
 	    ;;
       2)
@@ -261,7 +261,7 @@ xedmenu(){
         git fetch upstream
         git checkout master
         git merge upstream/master
-        read -p "...ENDED! CLICK TO GO NEXT!"
+        read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
 	    xedmenu
 	    ;;
       3)
@@ -269,21 +269,21 @@ xedmenu(){
         cd xed
         
         meson --prefix=/usr build
-        read -p "...ENDED! CLICK TO GO NEXT!"
+        read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
         ninja -v -C build
-        read -p "...ENDED! CLICK TO GO NEXT!"
+        read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
 	    xedmenu
 	    ;;
       4)
         cd xed
         sudo ninja install -v -C build
-        read -p "...ENDED! CLICK TO GO NEXT!"
+        read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
 	    xedmenu
 	    ;;
       5)
         cd ..
         sudo rm -R ./xed-dev
-        read -p "...ENDED! CLICK TO GO NEXT!"
+        read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
 	    mintprojectssmenu
 	    ;;
 
@@ -362,7 +362,7 @@ mainmenu (){
 	    sudo add-apt-repository ppa:linuxmint-daily-build-team/daily-builds
         sudo apt-get update
         sudo apt-get upgrade
-        read -p "...ENDED! CLICK TO GO NEXT!"
+        read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
         mainmenu
 	    ;;
 
