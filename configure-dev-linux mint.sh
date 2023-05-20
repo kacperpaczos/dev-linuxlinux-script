@@ -17,20 +17,46 @@ devupdatemenu(){
 	  1)
 	    sudo flatpak update
         read -p "...ENDED! CLICK TO GO NEXT!"
+        read -p "Remove unused packages [of flatpak]? (y/n): " response
+
+        if [ "$response" == "y" ]; then
+            sudo flatpak uninstall --unused
+            read -p "...ENDED! CLICK TO GO NEXT!"
+        fi
 	    devupdatemenu
 	    ;;
 
 	  2)
 	    sudo apt update && sudo apt upgrade
         read -p "...ENDED! CLICK TO GO NEXT!"
+        read -p "Remove unused packages [of apt]? (y/n): " response
+
+        if [ "$response" == "y" ]; then
+            sudo apt autoremove
+            read -p "...ENDED! CLICK TO GO NEXT!"
+        fi
 	    devupdatemenu
 	    ;;
 
       3)
 	    sudo flatpak update
+        read -p "...ENDED! CLICK TO GO NEXT!"
+        read -p "Remove unused packages [of flatpak]? (y/n): " response
+
+        if [ "$response" == "y" ]; then
+            sudo flatpak uninstall --unused
+            read -p "...ENDED! CLICK TO GO NEXT!"
+        fi
+
         sudo apt update && sudo apt upgrade
         read -p "...ENDED! CLICK TO GO NEXT!"
-	    devupdatemenu
+        read -p "Remove unused packages [of apt]? (y/n): " response
+
+        if [ "$response" == "y" ]; then
+            sudo apt autoremove
+            read -p "...ENDED! CLICK TO GO NEXT!"
+        fi
+        devupdatemenu
 	    ;;
 
 	  *)
@@ -314,7 +340,7 @@ mainmenu (){
 	read CHOOSE
 	case $CHOOSE in
       0)
-	    devlibmenu
+	    devupdatemenu
         mainmenu
 	    ;;
 	  1)
