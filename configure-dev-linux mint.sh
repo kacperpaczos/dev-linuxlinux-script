@@ -354,6 +354,7 @@ mainmenu (){
 	echo "3) Git, build, install... "
     echo "4) Enable daily builds... "
     echo "5) Install docker on LM... "
+    echo "6) Install prompt.sh on LM... "
     echo "*) Any key to exit... "
     
 	read CHOOSE
@@ -402,7 +403,66 @@ mainmenu (){
 	    ;;
 
 
-	  *)
+	  6)
+        sudo apt update && sudo apt install wget
+        mkdir git-prompt
+        cd git-prompt
+        wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
+        wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+        sudo chmod 664 git-prompt.sh
+        sudo chmod 664 git-completion.bash
+        cd ..
+
+        echo "Who/where is installing it?"
+        original_dir=$(pwd)
+
+        cd /home
+
+        for directory in */; do
+            echo " > ${directory%/}"
+        done
+
+        cd "$original_dir"
+
+        read -p "Prompt username: " username
+
+        source="./git-prompt"
+        destination="/home/$username/.bash_custom"
+
+        echo $source
+        echo $destination
+
+        mv "$source" "$destination"
+
+        if [ $? -eq 0 ]; then
+          echo "The files has been successfully moved."
+          sudo chown -R $username:$username /home/$username/.bash_custom
+
+          echo "$lines_to_add" >> ~/.bashrc
+          if [ -f "$HOME/.bashrc" ]; then
+            echo "The .bashrc file exists."
+            cp ~/.bashrc ~/.bashrc_backup
+
+            cp ./bashrc ~/.bashrc
+          fi
+
+          if [ -f "$HOME/.zshrc" ]; then
+            echo "The .zshrc file exists."
+            echo "I DO NOTHING!."
+          fi
+
+          read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
+          mainmenu
+        else
+          echo "An error occurred while moving the files."
+          sudo rm -Rf ./git-prompt
+          read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
+          mainmenu
+        fi
+
+        ;;
+
+      *)
 	    exit
 	    ;;
 	esac
