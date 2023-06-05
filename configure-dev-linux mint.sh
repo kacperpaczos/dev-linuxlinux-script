@@ -209,7 +209,7 @@ mintupdatemenu(){
         # Clone the repository
         git clone "$repo_url"
         #git clone https://github.com/kacperpaczos/mintupdate.git
-        sudo chmod 777 -R ./mintupdate
+        sudo chmod 644 -R ./mintupdate
         cd mintupdate
         read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
 	    mintupdatemenu
@@ -224,26 +224,30 @@ mintupdatemenu(){
 	    mintupdatemenu
 	    ;;
       3)
-        sudo apt install libxml2-dev cmake meson libglib2.0-dev libgtk-3-dev libgtksourceview-4-dev libpeas-dev libgnomekbd-dev valac python-gi-dev gir1.2-dbusmenu-gtk3-0.4 libxkbfile-dev
+        #sudo apt install libxml2-dev cmake meson libglib2.0-dev libgtk-3-dev libgtksourceview-4-dev libpeas-dev libgnomekbd-dev valac python-gi-dev gir1.2-dbusmenu-gtk3-0.4 libxkbfile-dev
         cd ./mintupdate-dev/mintupdate
-        pwd
-        meson --prefix=/usr build
+        dpkg-buildpackage
         read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
-        ninja -v -C build
-        read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
-        
 	    mintupdatemenu
 	    ;;
       4)
-        cd ./mintupdate-dev/mintupdate
-        pwd
-        sudo ninja install -v -C build
+        cd ./mintupdate-dev/
+        sudo dpkg -i ./*.deb
         read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
 	    mintupdatemenu
 	    ;;
     
       5)
         sudo rm -R ./mintupdate-dev
+        read -p "Do you want to reinstall the mintupdate package? (yes/no): " answer
+
+        if [[ $answer == "yes" ]]; then
+            echo "Removing the mintupdate package..."
+            sudo apt purge mintupdate -y
+            
+            echo "Installing the mintupdate package..."
+            sudo apt install mintupdate -y
+        fi
         read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
 	    mintupdatemenu
 	    ;;
