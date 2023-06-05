@@ -128,21 +128,23 @@ devtoolsmenu (){
 
 xappmenu(){
     clear
+    cd $BASEDIR
 	echo "Choose option for xapp: "
 	echo "1) clone: "
-    echo "2) syncfork (you need 1 first! ): "
     echo "3) build "
     echo "4) install "
     echo "5) clear ALL "
     echo "*) Any key to exit... "
-
-    cd ..
 
 	read CHOOSE
 	case $CHOOSE in
 	  1)
         
         cd xapp-dev
+        read -p "Enter the repository URL from which you want to download the program \n(e.g., https://github.com/kacperpaczos/xapp.git): " repo_url
+
+        # Clone the repository
+        git clone "$repo_url"
         git clone https://github.com/kacperpaczos/xapp.git
         sudo chmod 777 -R ./xapp
         cd xapp
@@ -189,58 +191,61 @@ xappmenu(){
 }
 mintupdatemenu(){
     clear
+    cd $BASEDIR
 	echo "Choose option for mintupdate: "
 	echo "1) clone: "
-    echo "2) syncfork (you need 1 first! ): "
     echo "3) build "
     echo "4) install "
     echo "5) clear ALL "
     echo "*) Any key to exit... "
 
-    cd ..
-
 	read CHOOSE
 	case $CHOOSE in
 	  1)
-        
+        mkdir -p mintupdate-dev
         cd mintupdate-dev
-        git clone https://github.com/kacperpaczos/mintupdate.git
+        read -p "Enter the repository URL from which you want to download the program (e.g., https://github.com/kacperpaczos/mintupdate.git): " repo_url
+
+        # Clone the repository
+        git clone "$repo_url"
+        #git clone https://github.com/kacperpaczos/mintupdate.git
         sudo chmod 777 -R ./mintupdate
         cd mintupdate
         read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
-	    xappmenu
+	    mintupdatemenu
 	    ;;
       2)
-        cd mintupdate
+        cd ./mintupdate-dev/mintupdate
+        pwd
         git fetch upstream
         git checkout master
         git merge upstream/master
         read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
-	    xappmenu
+	    mintupdatemenu
 	    ;;
       3)
         sudo apt install libxml2-dev cmake meson libglib2.0-dev libgtk-3-dev libgtksourceview-4-dev libpeas-dev libgnomekbd-dev valac python-gi-dev gir1.2-dbusmenu-gtk3-0.4 libxkbfile-dev
-        cd mintupdate
+        cd ./mintupdate-dev/mintupdate
+        pwd
         meson --prefix=/usr build
         read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
         ninja -v -C build
         read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
         
-	    xappmenu
+	    mintupdatemenu
 	    ;;
       4)
-        cd mintupdate
+        cd ./mintupdate-dev/mintupdate
+        pwd
         sudo ninja install -v -C build
         read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
-	    xappmenu
+	    mintupdatemenu
 	    ;;
     
       5)
-        
-        cd ..
         sudo rm -R ./mintupdate-dev
         read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
-	    mintprojectssmenu
+	    mintupdatemenu
 	    ;;
 	  *)
 	    mintprojectssmenu
@@ -309,7 +314,7 @@ xedmenu(){
 }
 mintprojectssmenu(){
     clear
-    
+    cd $BASEDIR
 	echo "Choose option: "
     echo "1) xapp (probably you need this): "
 	echo "2) xed: "
@@ -337,6 +342,7 @@ mintprojectssmenu(){
         cd mintupdate-dev
 
         mintupdatemenu
+        
         ;;
 
 	  *)
@@ -347,6 +353,7 @@ mintprojectssmenu(){
 
 mainmenu (){
     clear
+    cd $BASEDIR
 	echo "Choose option: "
     echo "0) Update the system... "
 	echo "1) Install lib*dev: "
@@ -439,11 +446,17 @@ mainmenu (){
           sudo chown -R $username:$username /home/$username/.bash_custom
 
           echo "$lines_to_add" >> ~/.bashrc
-          if [ -f "$HOME/.bashrc" ]; then
+          if [ -f "/home/$username/.bashrc" ]; then
             echo "The .bashrc file exists."
-            cp ~/.bashrc ~/.bashrc_backup
+            
+            if [ -f "/home/$username/.bashrc_backup" ]; then
+                mv "/home/$username/.bashrc_backup" "/home/$username/.bashrc"
+                echo "Restored .bashrc_backup to .bashrc."
+            fi
+            cp "/home/$username/.bashrc" "/home/$username/.bashrc_backup"
+            echo "Maked copy /home/$username/.bashrc to /home/$username/.bashrc_backup."
 
-            cp ./bashrc ~/.bashrc
+            cp ./bashrc "/home/$username/.bashrc"
           fi
 
           if [ -f "$HOME/.zshrc" ]; then
