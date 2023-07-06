@@ -139,13 +139,23 @@ xappmenu(){
 	read CHOOSE
 	case $CHOOSE in
 	  1)
-        
         cd xapp-dev
-        read -p "Enter the repository URL from which you want to download the program \n(e.g., https://github.com/kacperpaczos/xapp.git): " repo_url
+        read -p "Enter the repository URL from which you want to download the program:
+        1. https://github.com/kacperpaczos/xapp.git
+        2. https://github.com/linuxmint/xapp.git
+        Your choice (1/2): " choice
+
+        if [ "$choice" == "1" ]; then
+            repo_url="https://github.com/kacperpaczos/xapp.git"
+        elif [ "$choice" == "2" ]; then
+            repo_url="https://github.com/linuxmint/xapp.git"
+        else
+            echo "Invalid choice. Please enter the repository URL manually."
+            read -p "Repository URL: " repo_url
+        fi
 
         # Clone the repository
         git clone "$repo_url"
-        git clone https://github.com/kacperpaczos/xapp.git
         sudo chmod 777 -R ./xapp
         cd xapp
         read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
@@ -160,7 +170,8 @@ xappmenu(){
 	    xappmenu
 	    ;;
       3)
-        sudo apt install libxml2-dev cmake meson libglib2.0-dev libgtk-3-dev libgtksourceview-4-dev libpeas-dev libgnomekbd-dev valac python-gi-dev gir1.2-dbusmenu-gtk3-0.4 libxkbfile-dev
+        sudo apt install libxml2-dev cmake meson libglib2.0-dev libgtk-3-dev libgtksourceview-4-dev libpeas-dev libgnomekbd-dev valac python-gi-dev gir1.2-dbusmenu-gtk3-0.4 libxkbfile-dev libdbusmenu-gtk3-dev
+        cd xapp-dev
         cd xapp
         meson --prefix=/usr build
         read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
@@ -170,6 +181,7 @@ xappmenu(){
 	    xappmenu
 	    ;;
       4)
+        cd xapp-dev
         cd xapp
         sudo ninja install -v -C build
         read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
