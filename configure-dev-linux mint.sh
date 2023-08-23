@@ -378,6 +378,7 @@ mainmenu (){
     echo "4) Enable daily builds... "
     echo "5) Install docker on LM... "
     echo "6) Install prompt.sh on LM... "
+    echo "7) Install oh-my-bash on LM... "
     echo "*) Any key to exit... "
     
 	read CHOOSE
@@ -490,6 +491,17 @@ mainmenu (){
         fi
 
         ;;
+
+      7)
+        sudo apt update && sudo apt install wget
+        mkdir ohmybash
+        cd ohmybash
+	    bash -c "$(wget https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh -O -)"
+        cd ..
+        read -p "...ENDED! PRESS ANY KEY TO ESCAPE!"
+        mainmenu
+	    ;;
+
 
       *)
 	    exit
