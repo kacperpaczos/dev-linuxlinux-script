@@ -83,6 +83,7 @@ class MainMenu:
                 self.console.log(f"{task} complete")
 
     def install_oh_my_bash_on_LM(self):
+        print("install_oh_my_bash_on_LM function called")
         tasks = [
             "sudo apt update && sudo apt install wget",
             "mkdir ohmybash",
@@ -123,6 +124,7 @@ class MainMenu:
             print("The files has been successfully moved.")
             subprocess.run(['sudo', 'chown', '-R', username + ':' + username, '/home/' + username + '/.bash_custom'])
 
+            lines_to_add = "\n# Custom bash prompt\nsource ~/.bash_custom/git-prompt.sh\nsource ~/.bash_custom/git-completion.bash\n"
             with open('/home/' + username + '/.bashrc', 'a') as file:
                 file.write(lines_to_add)
             if os.path.exists("/home/" + username + "/.bashrc"):
