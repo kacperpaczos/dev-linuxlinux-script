@@ -7,30 +7,22 @@ import subprocess
 
 # subprojects
 from devupdate.menuUpdate import mintUpdateMenu
-from devlib.menuLibs import devLibMenu
 from devtools.menuTools import toolsMenu
-from mintprojects.menuProjects import mintProjectsMenu
-
-
 
 class MainMenu:
     def __init__(self):
         self.console = Console()
 
         self.updateMenu = mintUpdateMenu()
-        self.libMenu = devLibMenu()
         self.toolsMenu = toolsMenu()
-        self.mintProjectsMenu = mintProjectsMenu()
 
         self.options = {
             "0": self.devupdatemenu,
-            "1": self.devlibmenu,
-            "2": self.devtoolsmenu,
-            "3": self.mintprojectssmenu,
-            "4": self.enable_daily_builds,
-            "5": self.install_docker_on_LM,
-            "6": self.install_prompt_sh_on_LM,
-            "7": self.install_oh_my_bash_on_LM,
+            "1": self.devtoolsmenu,
+            "2": self.enable_daily_builds,
+            "3": self.install_docker_on_LM,
+            "4": self.install_prompt_sh_on_LM,
+            "5": self.install_oh_my_bash_on_LM,
             "*": self.exit
         }
         self.run()
@@ -38,14 +30,8 @@ class MainMenu:
     def devupdatemenu(self):
         self.updateMenu.run()
 
-    def devlibmenu(self):
-        self.libMenu.run() # TODO
-
     def devtoolsmenu(self):
         self.toolsMenu.run()
-
-    def mintprojectssmenu(self):
-        self.mintProjectsMenu.run()
 
     def enable_daily_builds(self):
         print("enable_daily_builds function called")
@@ -168,7 +154,7 @@ class MainMenu:
     def run(self):
         self.console.clear()
         while True:
-            self.console.print("[0] Update the system\n[1] Install lib*dev\n[2] Install dev-tools\n[3] Git, build, install\n[4] Enable daily builds\n[5] Install docker on LM\n[6] Install prompt.sh on LM\n[7] Install oh-my-bash on LM\n[*] Any key to exit")
+            self.console.print("[0] Update the system\n[1] Install dev-tools\n[2] Enable daily builds\n[3] Install docker on LM\n[4] Install prompt.sh on LM\n[5] Install oh-my-bash on LM\n[*] Any key to exit")
             choice = Prompt.ask("Choose an option", choices=list(self.options.keys()))
             if choice == "*":
                 self.exit()
