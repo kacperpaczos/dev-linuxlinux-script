@@ -10,6 +10,7 @@ class toolsMenu:
             "2": self.install_dev_tools,
             "3": self.git_build_install,
             "4": self.enable_daily_builds,
+            "5": self.install_biblioteca,
             "*": self.exit
         }
 
@@ -25,10 +26,13 @@ class toolsMenu:
     def enable_daily_builds(self):
         os.system('sudo flatpak install org.gnome.design.IconLibrary')
 
+    def install_biblioteca(self):
+        os.system('flatpak install flathub app.drey.Biblioteca')
+
     def run(self):
         self.console.clear()
         while True:
-            self.console.print("[1] Install lib*dev\n[2] Install dev-tools\n[3] Git, build, install\n[4] Enable daily builds\n[*] Any key to exit")
+            self.console.print("[1] Install lib*dev\n[2] Install dev-tools\n[3] Git, build, install\n[4] Enable daily builds\n[5] Install Biblioteca\n[*] Any key to exit")
             choice = Prompt.ask("Choose an option", choices=list(self.options.keys()))
             if choice == "*":
                 break
