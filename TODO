@@ -1,0 +1,19 @@
+Instalacja w systmie
+
+Tworzenie przestrzeni jak npm
+
+yarn init
+
+name (your-project):
+version (1.0.0):
+description:
+entry point (index.js):
+git repository:
+author:
+license (MIT):
+
+
+przeniesc bash do misc
+tworzy tez gałąż z tym.
+
+construction
